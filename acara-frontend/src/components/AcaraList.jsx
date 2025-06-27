@@ -8,7 +8,8 @@ export default function AcaraList() {
   const [acara, setAcara] = useState([]);
 
   const fetchData = () => {
-    axios.get("http://localhost:8000/api/acara")
+    axios
+      .get("http://localhost:8000/api/acara")
       .then((res) => {
         const result = Array.isArray(res.data) ? res.data : res.data.data ?? [];
         setAcara(result);
@@ -25,7 +26,7 @@ export default function AcaraList() {
 
   return (
     <div className="p-4 space-y-6">
-      <h1 className="text-2xl font-bold mb-4">Daftar Acara</h1>
+      <h1 className="text-2xl font-bold mb-4">Daftar Acara Event</h1>
       <AcaraForm onSuccess={fetchData} />
       <div className="space-y-4">
         {acara.map((item) => (
@@ -34,7 +35,9 @@ export default function AcaraList() {
             <p>{item.deskripsi}</p>
             <p>{item.lokasi}</p>
             <p>{item.tanggal}</p>
-            <p>{item.waktu_mulai} - {item.waktu_selesai}</p>
+            <p>
+              {item.waktu_mulai} - {item.waktu_selesai}
+            </p>
             <p>Biaya: {item.biaya}</p>
             <p>Kuota: {item.kuota}</p>
             <p>Status: {item.status}</p>
